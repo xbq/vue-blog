@@ -21,7 +21,7 @@
       <select v-model="blog.author">
         <option v-for="(author,index) in authors" :key="index">{{author}}</option>
       </select>
-      <button @click.prevent="post">添加博客</button>
+      <button @click.prevent="addBlog">添加博客</button>
     </form>
     <hr>
     <div id="preview">
@@ -52,8 +52,14 @@ export default {
     };
   },
   methods: {
-    post:function(){
-      this.$http.post();
+    addBlog:function(){
+      this.$http.post("https://jsonplaceholder.typicode.com/posts",{
+        title:this.blog.title,
+        body:this.blog.content,
+        userId:1
+      }).then(res=>{
+        console.log(res);
+      });
     }
   }
 };
